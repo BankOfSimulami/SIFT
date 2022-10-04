@@ -1,4 +1,4 @@
-package xyz.stoneworkssift.sift;
+package xyz.stoneworkssift.gateway;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +8,6 @@ public class TestRest {
 
     @GetMapping("/")
     public String root() {
-        return "Hello, World!ss";
+        return "gateway";
     }
 }
