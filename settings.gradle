@@ -1,1 +1,3 @@
 rootProject.name = 'SIFT'
+
+include 'sift'
