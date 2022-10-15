@@ -1,4 +1,4 @@
 rootProject.name = 'SIFT'
 
-include 'sift'
 include 'gateway'
+include 'library'
