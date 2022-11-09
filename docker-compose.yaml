@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  rabbitmq:
+  broker:
     image: rabbitmq:management-alpine
     networks:
       - sift
@@ -9,24 +9,59 @@ services:
       - "15672:15672"
     tty: true
     restart: unless-stopped
+  database:
+    image: postgres:15-alpine
+    networks:
+      - sift
+    environment:
+      - "POSTGRES_PASSWORD=dev"
+    ports:
+      - "5432:5432"
+    tty: true
+    restart: unless-stopped
   gateway:
     build: ./gateway
     networks:
       - sift
     depends_on:
-      - rabbitmq
+      - broker
+      - database
     environment:
       - "SPRING_RABBITMQ_HOST=rabbitmq"
     ports:
       - "9090:8080"
     tty: true
     restart: unless-stopped
-# Testing networking. Only making a container accessible by the gateway
-#  nginx:
-#    image: nginx:latest
-#    network_mode: service:gateway
-#    tty: true
-#    restart: unless-stopped
+  discord:
+    build: ./discord
+    networks:
+      - sift
+    depends_on:
+      - gateway
+    environment:
+      - "SPRING_RABBITMQ_HOST=rabbitmq"
+    tty: true
+    restart: unless-stopped
+  forex:
+    build: ./forex
+    networks:
+      - sift
+    depends_on:
+      - gateway
+    environment:
+      - "SPRING_RABBITMQ_HOST=rabbitmq"
+    tty: true
+    restart: unless-stopped
+  ledger:
+    build: ./ledger
+    networks:
+      - sift
+    depends_on:
+      - gateway
+    environment:
+      - "SPRING_RABBITMQ_HOST=rabbitmq"
+    tty: true
+    restart: unless-stopped
 networks:
   sift:
     driver: bridge

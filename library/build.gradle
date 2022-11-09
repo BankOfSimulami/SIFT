@@ -1,6 +1,0 @@
-plugins {
-    id 'org.springframework.boot' version '2.7.1' apply false
-}
-
-dependencies {
-}
