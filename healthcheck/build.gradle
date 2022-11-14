@@ -1,0 +1,9 @@
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'xyz.stoneworkssift.healthcheck.HealthCheck'
+        )
+    }
+}
+
+version = ""

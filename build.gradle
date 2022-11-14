@@ -16,4 +16,12 @@ subprojects {
             implementation project(':library')
         }
     }
+
+    tasks.build.doLast {
+        if (getProject().getProjectDir().name == "healthcheck" || getProject().getProjectDir().name == "library") return
+        copy {
+            from "../" + rootProject.project("healthcheck").getProjectDir().name + "/build/libs/healthcheck.jar"
+            into "build/libs"
+        }
+    }
 }
