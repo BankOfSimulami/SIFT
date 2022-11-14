@@ -6,13 +6,14 @@ Stoneworks Interbank Financial Telecommunication
 This is a spring boot multi project application with microservices to fulfill what is needed to run a bank communication network in stoneworks.
 ## Structure
 
-| Codebase           |      Description      |
-|:-------------------|:---------------------:|
-| [Gateway](gateway) |       SIFT API        |
-| [Discord](discord) |     Bot Processor     |
-| [Forex](forex)     | Exchange Rate Graphs  |
-| [Ledger](ledger)   | Open Transactions API |
-| [Library](library) |    Shared Classes     |
+| Codebase                    |      Description       |
+|:----------------------------|:----------------------:|
+| [Gateway](gateway)          |        SIFT API        |
+| [Discord](discord)          |     Bot Processor      |
+| [Forex](forex)              |  Exchange Rate Graphs  |
+| [Ledger](ledger)            | Open Transactions API  |
+| [Library](library)          |     Shared Classes     |
+| [Health Check](healthcheck) | Collecting Health Data |
 
 ## Tech Stack
 
@@ -36,9 +37,13 @@ Go to the project directory
   cd SIFT
 ```
 
+Build SIFT
+```bash
+./gradlew buildDependents
+```
+
 Start SIFT
 
 ```bash
   docker compose up -d
 ```
-
